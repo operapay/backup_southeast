@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+    <script src="https://code.highcharts.com/modules/treemap.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+
+    <!-- Resources -->
+    <!-- <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+        <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container" style="max-width: 100%;">
+        <div class="banner">
+            <!-- <img src="images/banner.png"> -->
+            <div id="zoom_map" style="left:0; max-height: 800px; height: 1250px;"></div>
+                <script>
+                    //basic map config with custom fills, mercator projection
+                    var map = new Datamap({
+                        scope: 'world',
+                        element: document.getElementById('zoom_map'),
+                        setProjection: function (element) {
+                            var projection = d3.geo.equirectangular()
+                                .center([135, 10])
+                                .rotate([1, 0])
+                                .scale(1000)
+                                .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+                            var path = d3.geo.path()
+                                .projection(projection);
+
+                            return { path: path, projection: projection };
+                        },
+                        fills: {
+                            defaultFill: '#e7e7e7',
+                            vnm: '#d4a4db',
+                            idn: '#84d2de',
+                            phl: '#ffe57e',
+                            mys: '#fb7c6c',
+                            lt50: '#ac5281'
+                        },
+
+                        data: {
+                            VNM: { fillKey: 'vnm' },
+                            IDN: { fillKey: 'idn' },
+                            PHL: { fillKey: 'phl' },
+                            MYS: { fillKey: 'mys' },
+                            SGP: { fillKey: 'lt50' },
+                        }
+                    })
+                    // map.bubbles([
+                    //     {
+                    //         name: 'vietnam',
+                    //         radius: 23,
+                    //         centered: 'VNM',
+                    //         country: 'VNM',
+                    //         yeild: 0,
+                    //         fillKey: 'VNM',
+                    //         date: '1954-03-01'
+                    //     },
+                    //     {
+                    //         name: 'indonesia',
+                    //         radius: 23,
+                    //         centered: 'IDN',
+                    //         country: 'IDN',
+                    //         yeild: 0,
+                    //         fillKey: 'IDN',
+                    //         date: '1954-03-01'
+                    //     },
+                    //     {
+                    //         name: 'philippines',
+                    //         radius: 23,
+                    //         centered: 'PHL',
+                    //         country: 'PHL',
+                    //         yeild: 0,
+                    //         fillKey: 'phl',
+                    //         date: '1954-03-01'
+                    //     },
+                    //     {
+                    //         name: 'malaysia',
+                    //         radius: 23,
+                    //         centered: 'MYS',
+                    //         country: 'MYS',
+                    //         yeild: 0,
+                    //         fillKey: 'mys',
+                    //         date: '1954-03-01'
+                    //     },
+                    //     {
+                    //         name: 'singapore',
+                    //         latitude: 1.3,
+                    //         longitude: 103.8,
+                    //         radius: 23,
+                    //         fillKey: 'lt50'
+                    //     },
+                    // ],
+                    //     {
+                    //         popupTemplate: function (geo, data) {
+                    //             // document.getElementById("philippines").className = "tab-pane fade";
+                    //             // document.getElementById("vietnam").className = "tab-pane fade";
+                    //             // document.getElementById("singapore").className = "tab-pane fade";
+                    //             // document.getElementById("indonesia").className = "tab-pane fade";
+                    //             // document.getElementById("malaysia").className = "tab-pane fade";
+                    //             // console.log(data.name)
+                    //             // console.log(document.getElementById(data.name).className)
+                    //             // document.getElementById(data.name).className = "tab-pane fade in active";
+                    //             return '<div style="background-color:transparent; border:0px; text-align:center;" class="hoverinfo"><button class="btn" style="cursor: pointer; background-color:transparent; border:none"><img width="100px" src="button/' + data.name + '.png"\></button><h3 class="bg-white text-dark">' + data.name + '</h3></div>';
+                    //         }
+                    //     });
+                    ;
+                </script>
+            <a data-toggle="modal" data-target="#modal-philippines" href="#philippines"><button class="btn_philippines"
+                    style="cursor: pointer; background-color:transparent; border:none"><img src="button/philippines.png"
+                        alt=""></button></a>
+            <a data-toggle="tab" href="#vietnam"><button class="btn_vietnam"
+                    style="cursor: pointer; background-color:transparent; border:none"><img src="button/vietnam.png"
+                        alt=""></button></a>
+            <a data-toggle="tab" href="#indonesia"><button class="btn_indonesia"
+                    style="cursor: pointer; background-color:transparent; border:none"><img src="button/indonesia.png"
+                        alt=""></button></a>
+            <a data-toggle="tab" href="#singapore"><button class="btn_singapore"
+                    style="cursor: pointer; background-color:transparent; border:none"><img src="button/singapore.png"
+                        alt=""></button></a>
+            <a data-toggle="tab" href="#malaysia"><button class="btn_malaysia"
+                    style="cursor: pointer; background-color:transparent; border:none"><img src="button/malaysia.png"
+                        alt=""></button></a>
+        </div>
+
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modal-philippines" role="dialog">
+                <div class="modal-dialog modal-xl">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Philippines</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>maybe flag or map Philippines</p>
+                            <div id="container2"></div>
+                            <div id="pie"></div>
+                            <p>The gross domestic product (GDP) measures of national income and output for a given
+                                country's
+                                economy.
+                                The
+                                gross domestic product (GDP) is equal to the total expenditures for all final goods
+                                and
+                                services
+                                produced within
+                                the country in a stipulated period of time</p>
+                            <div id="container"></div>
+                            <p>Government Revenues refer to all receipts the government gets, including taxes,
+                                custom
+                                duties, revenue
+                                from
+                                state-owned enterprises, capital revenues and foreign aid. Government Revenues are
+                                part
+                                of
+                                government
+                                budget
+                                balance calculation. </p>
+                            <div id="bar"></div>
+                            <p>The GDP per capita is obtained by dividing the country’s gross domestic product,
+                                adjusted
+                                by
+                                inflation,
+                                by the
+                                total population.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+ 
+
+
+</body>
+
+<script src="./gdp/test.js"></script>
+
+</html>

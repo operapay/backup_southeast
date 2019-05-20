@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+  <script src="https://code.highcharts.com/modules/treemap.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <!-- I recommend you host this file on your own, since this will change without warning -->
+  <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+
+
+
+  <script src="./gdp/test.js"></script>
+  
+</head>
+
+<body>
+
+  <h2>South East Asia</h2>
+  <!-- <p><a href="http://datamaps.github.io/">DataMaps Project Homepage</a></p> -->
+  
+  <div id="zoom_map" style="position: relative; width: 80%; max-height: 450px; height: 1250px;">
+    
+  </div>
+  <script>
+      //basic map config with custom fills, mercator projection
+      var map = new Datamap({
+        scope: 'world',
+        element: document.getElementById('zoom_map'),
+        setProjection: function (element) {
+          var projection = d3.geo.equirectangular()
+            .center([120, 0])
+            .rotate([1, 0])
+            .scale(500)
+            .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+          var path = d3.geo.path()
+            .projection(projection);
+  
+          return { path: path, projection: projection };
+        },
+        fills: {
+          defaultFill: '#dfdcd6',
+          vnm: '#f0b5b3',
+          idn: '#f6839c',
+          phl: '#fe64a3',
+          mys: '#cb807d',
+          sg: '#a9b18f'
+        },
+  
+        data: {
+          VNM: { fillKey: 'vnm' },
+          IDN: { fillKey: 'idn' },
+          PHL: { fillKey: 'phl' },
+          MYS: { fillKey: 'mys' },
+          SG: { fillKey: 'sgp' },
+        }
+      })
+      map.bubbles([
+        {
+          name: 'Vietnam',
+          radius: 23,
+          centered: 'VNM',
+          country: 'VNM',
+          yeild: 0,
+          fillKey: 'VNM',
+          date: '2018-03-01'
+        },
+        {
+          name: 'Indonesia',
+          radius: 23,
+          centered: 'IDN',
+          country: 'IDN',
+          yeild: 0,
+          fillKey: 'IDN',
+          date: '2018-03-01'
+        },
+        {
+          name: 'Philipinies',
+          radius: 23,
+          centered: 'PHL',
+          country: 'PHL',
+          yeild: 0,
+          fillKey: 'PHL',
+          date: '2018-03-01'
+        },
+        {
+          name: 'Malaysia',
+          radius: 23,
+          centered: 'MYS',
+          country: 'MYS',
+          yeild: 0,
+          fillKey: 'MYS',
+          date: '2018-03-01'
+        },
+        {
+          name: 'Singapore',
+          radius: 23,
+          centered: 'BRN',
+          country: 'SG',
+          yeild: 0,
+          fillKey: 'SG',
+          date: '2018-03-01'
+        },
+      ],
+        {
+          popupTemplate: function (geo, data) {
+            return "<div class='hoverinfo'>It is " + data.name + "</div>";
+          }
+        });
+    </script>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#philippines"><button class="btn"
+          style="cursor: pointer; background-color:transparent; border:none"><img src="button/philippines.png"
+            alt=""></button></a></li>
+    <li><a data-toggle="tab" href="#vietnam"><button class="btn"
+          style="cursor: pointer; background-color:transparent; border:none"><img src="button/vietnam.png"
+            alt=""></button></a></li>
+    <li><a data-toggle="tab" href="#indonesia"><button class="btn"
+          style="cursor: pointer; background-color:transparent; border:none"><img src="button/indonesia.png"
+            alt=""></button></a></li>
+    <li><a data-toggle="tab" href="#singapore"><button class="btn"
+          style="cursor: pointer; background-color:transparent; border:none"><img src="button/singapore.png"
+            alt=""></button></a></li>
+    <li><a data-toggle="tab" href="#malaysia"><button class="btn"
+          style="cursor: pointer; background-color:transparent; border:none"><img src="button/malaysia.png"
+            alt=""></button></a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div id="philippines" class="tab-pane fade in active">
+
+      <h1 id="phi">Philippines</h1>
+      <p>maybe flag or map Philippines</p>
+      <div id="container2"></div>
+      <div id="pie"></div>
+      <p>The gross domestic product (GDP) measures of national income and output for a given country's economy. The
+        gross domestic product (GDP) is equal to the total expenditures for all final goods and services produced within
+        the country in a stipulated period of time</p>
+      <div id="container"></div>
+      <p>Government Revenues refer to all receipts the government gets, including taxes, custom duties, revenue from
+        state-owned enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+        balance calculation. </p>
+      <div id="bar"></div>
+      <p>The GDP per capita is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the
+        total population.</p>
+
+    </div>
+    <div id="indonesia" class="tab-pane fade">
+
+      <h1 id="phi">Vietnam</h1>
+      <p>maybe flag or map Philippines</p>
+      <div id="container2"></div>
+      <div id="pie"></div>
+      <p>The gross domestic product (GDP) measures of national income and output for a given country's economy. The
+        gross domestic product (GDP) is equal to the total expenditures for all final goods and services produced within
+        the country in a stipulated period of time</p>
+      <div id="container"></div>
+      <p>Government Revenues refer to all receipts the government gets, including taxes, custom duties, revenue from
+        state-owned enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+        balance calculation. </p>
+      <div id="bar"></div>
+      <p>The GDP per capita is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the
+        total population.</p>
+
+    </div>
+    <div id="malaysia" class="tab-pane fade">
+
+      <h1 id="phi">Malaysia</h1>
+      <p>maybe flag or map Philippines</p>
+      <div id="container2"></div>
+      <div id="pie"></div>
+      <p>The gross domestic product (GDP) measures of national income and output for a given country's economy. The
+        gross domestic product (GDP) is equal to the total expenditures for all final goods and services produced within
+        the country in a stipulated period of time</p>
+      <div id="container"></div>
+      <p>Government Revenues refer to all receipts the government gets, including taxes, custom duties, revenue from
+        state-owned enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+        balance calculation. </p>
+      <div id="bar"></div>
+      <p>The GDP per capita is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the
+        total population.</p>
+
+    </div>
+    <div id="singapore" class="tab-pane fade">
+
+      <h1 id="phi">Singapore</h1>
+      <p>maybe flag or map Philippines</p>
+      <div id="container2"></div>
+      <div id="pie"></div>
+      <p>The gross domestic product (GDP) measures of national income and output for a given country's economy. The
+        gross domestic product (GDP) is equal to the total expenditures for all final goods and services produced within
+        the country in a stipulated period of time</p>
+      <div id="container"></div>
+      <p>Government Revenues refer to all receipts the government gets, including taxes, custom duties, revenue from
+        state-owned enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+        balance calculation. </p>
+      <div id="bar"></div>
+      <p>The GDP per capita is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the
+        total population.</p>
+
+    </div>
+    <div id="vietnam" class="tab-pane fade">
+
+      <h1 id="phi">Vietnam</h1>
+      <p>maybe flag or map Philippines</p>
+      <div id="container2"></div>
+      <div id="pie"></div>
+      <p>The gross domestic product (GDP) measures of national income and output for a given country's economy. The
+        gross domestic product (GDP) is equal to the total expenditures for all final goods and services produced within
+        the country in a stipulated period of time</p>
+      <div id="container"></div>
+      <p>Government Revenues refer to all receipts the government gets, including taxes, custom duties, revenue from
+        state-owned enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+        balance calculation. </p>
+      <div id="bar"></div>
+      <p>The GDP per capita is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the
+        total population.</p>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/carousel/">
+
+     <link rel="stylesheet" href="./css/conclusion.css">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="./css/style.css">
+     <link rel="stylesheet" href="./css/my.css">
+     <link rel="stylesheet" href="./css/in.css">
+     <link rel="stylesheet" href="./css/si.css">
+     <link rel="stylesheet" href="./css/vi.css">
+     <link rel="stylesheet" href="./css/map_style.css">
+     <script src="./java/myscripts.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+     <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+     <script src="https://code.highcharts.com/modules/treemap.js"></script>
+     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+     <script src="https://code.highcharts.com/modules/export-data.js"></script>
+     <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+     <script src="https://code.highcharts.com/highcharts-more.js"></script>
+     <script src="http://d3js.org/d3.v3.min.js"></script>
+     <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+
+     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+</head>
+
+<body>
+     <div class="container" style="max-width: 100%;">
+          <div class="row">
+               <div class="col-sm">
+                    <div class="banner">
+                         <div class="row text-center">
+                              <div class="col-sm">
+
+                                   <h1 class="display-1">Southeast Asia</h1>
+                              </div>
+                         </div>
+                         <!-- <img src="images/map.png"> -->
+                         <!-- <div id="zoom_map"
+                              style="position: relative; max-width: 100%; max-height: 800px; height: 1250px;"> -->
+                              <div class="div_btn">
+
+                                   <a href="#section-philippines"><button class="btn_philippines"
+                                             style="cursor: pointer; background-color:transparent; border:none"><img
+                                                  src="button/philippines.png" alt=""></button></a>
+
+
+                                   <a href="#section-vietnam"><button class="btn_vietnam"
+                                             style="cursor: pointer; background-color:transparent; border:none"><img
+                                                  src="button/vietnam.png" alt=""></button></a>
+
+
+                                   <a href="#section-indonesia"><button class="btn_indonesia"
+                                             style="cursor: pointer; background-color:transparent; border:none"><img
+                                                  src="button/indonesia.png" alt=""></button></a>
+
+                                   <a href="#section-singapore"><button class="btn_singapore"
+                                             style="cursor: pointer; background-color:transparent; border:none"><img
+                                                  src="button/singapore.png" alt=""></button></a>
+
+                                   <a href="#section-malaysia"><button class="btn_malaysia"
+                                             style="cursor: pointer; background-color:transparent; border:none"><img
+                                                  src="button/malaysia.png" alt=""></button></a>
+
+
+                                   <div class="text_box">
+                                        <div class="gdp-text">
+                                             <h2>Our website</h2>
+                                             <p>Visualize the GDP, Government Revenues, Taxes, and etc.
+                                             </p>
+                                             <p><b class="font-weight-bold">Click PIN on the left side </b> to visit the countries that consist of
+                                                  Philippines, Malaysia, Indonesia, Singapore, and Vietnam.
+                                                  And <a href="#section-conclusion" class="font-weight-bold">Click this for conclusion.</a> </p>
+                                        </div>
+
+                                   </div>
+
+                              </div>
+                         </div>
+                         <script>
+                              //basic map config with custom fills, mercator projection
+                              var map = new Datamap({
+                                   scope: 'world',
+                                   element: document.getElementById('zoom_map'),
+                                   setProjection: function (element) {
+                                        console.log(element.offsetWidth)
+                                        var projection = d3.geo.equirectangular()
+                                             .center([135, 10])
+                                             .rotate([1, 0])
+                                             .scale(1000)
+                                             .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+                                        var path = d3.geo.path()
+                                             .projection(projection);
+
+                                        return { path: path, projection: projection };
+                                   },
+
+                                   fills: {
+                                        defaultFill: '#e7efc5',
+                                        vnm: '#d4a4db',
+                                        idn: '#84d2de',
+                                        phl: '#ffe57e',
+                                        mys: '#fb7c6c',
+                                        lt50: '#ac5281'
+                                   },
+
+                                   data: {
+                                        VNM: { fillKey: 'vnm' },
+                                        IDN: { fillKey: 'idn' },
+                                        PHL: { fillKey: 'phl' },
+                                        MYS: { fillKey: 'mys' },
+                                        SGP: { fillKey: 'lt50' },
+                                   }
+                              })
+                              map.bubbles([
+                                   {
+                                        name: 'vietnam',
+
+                                        centered: 'VNM',
+                                        country: 'VNM',
+                                        yeild: 0,
+                                        fillKey: 'VNM',
+                                        date: '1954-03-01'
+                                   },
+                                   {
+                                        name: 'indonesia',
+                                        // radius: 10,
+                                        centered: 'IDN',
+                                        country: 'IDN',
+                                        yeild: 0,
+                                        fillKey: 'IDN',
+                                        date: '1954-03-01'
+                                   },
+                                   {
+                                        name: 'philippines',
+                                        // radius: 10,
+                                        centered: 'PHL',
+                                        country: 'PHL',
+                                        yeild: 0,
+                                        fillKey: 'phl',
+                                        date: '1954-03-01'
+                                   },
+                                   {
+                                        name: 'malaysia',
+                                        // radius: 10,
+                                        centered: 'MYS',
+                                        country: 'MYS',
+                                        yeild: 0,
+                                        fillKey: 'mys',
+                                        date: '1954-03-01'
+                                   },
+                                   {
+                                        name: 'singapore',
+                                        latitude: 1.3,
+                                        longitude: 103.8,
+                                        // radius: 10,
+                                        fillKey: 'lt50'
+                                   },
+                              ],
+                                   {
+                                        popupTemplate: function (geo, data) {
+                                             // document.getElementById("philippines").className = "tab-pane fade";
+                                             // document.getElementById("vietnam").className = "tab-pane fade";
+                                             // document.getElementById("singapore").className = "tab-pane fade";
+                                             // document.getElementById("indonesia").className = "tab-pane fade";
+                                             // document.getElementById("malaysia").className = "tab-pane fade";
+                                             // console.log(data.name)
+                                             // console.log(document.getElementById(data.name).className)
+                                             // document.getElementById(data.name).className = "tab-pane fade in active";
+                                             return '<div style="background-color:transparent; border:0px; text-align:center;" class="hoverinfo"><button class="btn" style="cursor: pointer; background-color:transparent; border:none"><img width="100px" src="button/' + data.name + '.png"\></button><h3 class="bg-white text-dark">' + data.name + '</h3></div>';
+                                        }
+                                   });
+                         </script>
+
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!--================Philippines================-->
+     <div class="title-row" id="section-philippines">
+          <img src="./imgs/ph_map.png" alt="Philippines Map" width="100%" height="70%" style="margin:20% 2%">
+          <div class='title-text'>
+               <div class="row">
+                    <img src="./imgs/ph_flag.png" alt="Philippines Flag" width="10%" height="10%"
+                         style="margin:0 2% 4% 2%;">
+                    <h1 id="country-name">Philippines</h1>
+               </div>
+               <div class="row">
+                    <div class="col">
+                         <div class="col">
+                              <h2>Export</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Exportmachines</h6>
+                                        <p>69%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Metal</h6>
+                                        <p>3.8%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Transportation</h6>
+                                        <p>3.1%</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="col">
+                              <h2>Import</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>35%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Mineral products</h6>
+                                        <p>14%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Transportation</h6>
+                                        <p>11%</p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-4">
+                         <div class="col">
+                              <h3>GPD 2017 Ranking</h3>
+                              <p>
+                                   <p style="font-style: italic; display: inline">3rd rank</p> in South East Asia (SEA)
+                              </p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!--================Malaysia================-->
+     <div class="title-row" id="section-malaysia">
+          <img src="./imgs/malay_map.png" alt="Malaysia Map" width="100%" height="70%" style="margin:20% 2%">
+          <div class='title-text'>
+               <div class="row">
+                    <img src="./imgs/malaysia.png" alt="Malaysia Flag" width="10%" height="10%"
+                         style="margin:0 2% 4% 2%;">
+                    <h1 id="country-name">Malaysia</h1>
+               </div>
+               <div class="row">
+                    <div class="col">
+                         <div class="col">
+                              <h2>Export</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>49%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Mineral products</h6>
+                                        <p>16%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Animal and Vegetable bi-products</h6>
+                                        <p>5.9%</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="col">
+                              <h2>Import</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>41%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Mineral products</h6>
+                                        <p>14%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Metals</h6>
+                                        <p>8.3%</p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-4">
+                         <div class="col">
+                              <h3>GPD 2017 Ranking</h3>
+                              <p>
+                                   <p style="font-style: italic; display: inline">4th rank</p> in South East Asia (SEA)
+                              </p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="gdp-row">
+          <div class="gdp-text1">
+               <h2>The gross domestic product (GDP)</h1>
+                    <p>measures of national income and output for a given country's economy. The gross domestic product
+                         (GDP) is equal to the total expenditures for all final goods and services produced within the
+                         country in a stipulated period of time</p>
+                    <button onclick="myFunction_my()">GDP</button>
+                    <button onclick="myFunction1_my()">GDP Details 2017</button>
+          </div>
+          <div class="chart">
+               <div id="container2_my"></div>
+               <div id="pie_my"></div>
+          </div>
+     </div>
+
+     <div class="revenue-row">
+          <div id="container_my"></div>
+          <div class="gdp-text">
+               <h2>Government Revenues</h2>
+               <p>refer to all receipts the government gets, including taxes, custom duties, revenue from state-owned
+                    enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+                    balance calculation. </p>
+          </div>
+     </div>
+
+     <div class="gdp-capital">
+          <div class="gdp-text">
+               <h2>The GDP per capita </h2>
+               <p>is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the total
+                    population.</p>
+          </div>
+          <div id="bar_my"></div>
+     </div>
+     <!--================Indonesia================-->
+     <div class="title-row" id="section-indonesia">
+          <img src="./imgs/indo_map.png" alt="Indonesia Map" width="100%" height="70%" style="margin:20% 2%">
+          <div class='title-text'>
+               <div class="row">
+                    <img src="./imgs/indonesia.png" alt="Indonesia Flag" width="10%" height="10%"
+                         style="margin:0 2% 4% 2%;">
+                    <h1 id="country-name">Indonesia</h1>
+               </div>
+               <div class="row">
+                    <div class="col">
+                         <div class="col">
+                              <h2>Export</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Mineral products</h6>
+                                        <p>23%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Animal and Vegetable bi-products</h6>
+                                        <p>14%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>9.6%</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="col">
+                              <h2>Import</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>24%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Mineral products</h6>
+                                        <p>18%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Metals</h6>
+                                        <p>10%</p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-4">
+                         <div class="col">
+                              <h3>GPD 2017 Ranking</h3>
+                              <p>
+                                   <p style="font-style: italic; display: inline">1st rank</p> in South East Asia (SEA)
+                              </p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="gdp-row">
+          <div class="gdp-text1">
+               <h2>The gross domestic product (GDP)</h1>
+                    <p>measures of national income and output for a given country's economy. The gross domestic product
+                         (GDP) is equal to the total expenditures for all final goods and services produced within the
+                         country in a stipulated period of time</p>
+                    <button onclick="myFunction_in()">GDP</button>
+                    <button onclick="myFunction1_in()">GDP Details 2017</button>
+          </div>
+          <div class="chart">
+               <div id="container2_in"></div>
+               <div id="pie_in"></div>
+          </div>
+     </div>
+
+     <div class="revenue-row">
+          <div id="container_in"></div>
+          <div class="gdp-text">
+               <h2>Government Revenues</h2>
+               <p>refer to all receipts the government gets, including taxes, custom duties, revenue from state-owned
+                    enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+                    balance calculation. </p>
+          </div>
+     </div>
+
+     <div class="gdp-capital">
+          <div class="gdp-text">
+               <h2>The GDP per capita </h2>
+               <p>is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the total
+                    population.</p>
+          </div>
+          <div id="bar_in"></div>
+     </div>
+     <!--================Singapore================-->
+     <div class="title-row" id="section-singapore">
+          <img src="./imgs/singapore_map.png" alt="Singapore Map" width="100%" height="70%" style="margin:20% 2%">
+          <div class='title-text'>
+               <div class="row">
+                    <img src="./imgs/singapore.png" alt="Singapore Flag" width="10%" height="10%"
+                         style="margin:0 2% 4% 2%;">
+                    <h1 id="country-name">Singapore</h1>
+               </div>
+               <div class="row">
+                    <div class="col">
+                         <div class="col">
+                              <h2>Export</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>53%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Mineral products</h6>
+                                        <p>14%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Chemical products</h6>
+                                        <p>11%</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="col">
+                              <h2>Import</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>40%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Mineral products</h6>
+                                        <p>25%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Chemical products</h6>
+                                        <p>6.1%</p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-4">
+                         <div class="col">
+                              <h3>GPD 2017 Ranking</h3>
+                              <p>
+                                   <p style="font-style: italic; display: inline">6th rank</p> in South East Asia (SEA)
+                              </p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="gdp-row">
+          <div class="gdp-text1">
+               <h2>The gross domestic product (GDP)</h1>
+                    <p>measures of national income and output for a given country's economy. The gross domestic product
+                         (GDP) is equal to the total expenditures for all final goods and services produced within the
+                         country in a stipulated period of time</p>
+                    <button onclick="myFunction_si()">GDP</button>
+                    <button onclick="myFunction1_si()">GDP Details 2017</button>
+          </div>
+          <div class="chart">
+               <div id="container2_si"></div>
+               <div id="pie_si"></div>
+          </div>
+     </div>
+
+     <div class="revenue-row">
+          <div id="container_si"></div>
+          <div class="gdp-text">
+               <h2>Government Revenues</h2>
+               <p>refer to all receipts the government gets, including taxes, custom duties, revenue from state-owned
+                    enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+                    balance calculation. </p>
+          </div>
+     </div>
+
+     <div class="gdp-capital">
+          <div class="gdp-text">
+               <h2>The GDP per capita </h2>
+               <p>is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the total
+                    population.</p>
+          </div>
+          <div id="bar_si"></div>
+     </div>
+     <!--================Vietnam================-->
+     <div class="title-row" id="section-vietnam">
+          <img src="./imgs/vietnam_map.png" alt="Vietnam Map" width="100%" height="70%" style="margin:20% 2%">
+          <div class='title-text'>
+               <div class="row">
+                    <img src="./imgs/vietnam.png" alt="Vietnam Flag" width="10%" height="10%"
+                         style="margin:0 2% 4% 2%;">
+                    <h1 id="country-name">Vietnam</h1>
+               </div>
+               <div class="row">
+                    <div class="col">
+                         <div class="col">
+                              <h2>Export</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>46%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Textiles</h6>
+                                        <p>15%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Footwear and Headwear</h6>
+                                        <p>9.3%</p>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="col">
+                              <h2>Import</h2>
+                              <div class="row">
+                                   <div class="col">
+                                        <h6>Machines</h6>
+                                        <p>37%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Textiles</h6>
+                                        <p>11%</p>
+                                   </div>
+                                   <div class="col">
+                                        <h6>Metals</h6>
+                                        <p>9%</p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-4">
+                         <div class="col">
+                              <h3>GPD 2017 Ranking</h3>
+                              <p>
+                                   <p style="font-style: italic; display: inline">5th rank</p> in South East Asia (SEA)
+                              </p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="gdp-row">
+          <div class="gdp-text1">
+               <h2>The gross domestic product (GDP)</h1>
+                    <p>measures of national income and output for a given country's economy. The gross domestic product
+                         (GDP) is equal to the total expenditures for all final goods and services produced within the
+                         country in a stipulated period of time</p>
+                    <button onclick="myFunction_vi()">GDP</button>
+                    <button onclick="myFunction1_vi()">GDP Details 2017</button>
+          </div>
+          <div class="chart">
+               <div id="container2_vi"></div>
+               <div id="pie_vi"></div>
+          </div>
+     </div>
+
+     <div class="revenue-row">
+          <div id="container_vi"></div>
+          <div class="gdp-text">
+               <h2>Government Revenues</h2>
+               <p>refer to all receipts the government gets, including taxes, custom duties, revenue from state-owned
+                    enterprises, capital revenues and foreign aid. Government Revenues are part of government budget
+                    balance calculation. </p>
+          </div>
+     </div>
+
+     <div class="gdp-capital">
+          <div class="gdp-text">
+               <h2>The GDP per capita </h2>
+               <p>is obtained by dividing the country’s gross domestic product, adjusted by inflation, by the total
+                    population.</p>
+          </div>
+          <div id="bar_vi"></div>
+     </div>
+     <!--===========conclusion======================-->
+     <div class="container-fluid" id="section-conclusion">
+      <h1 style="background-color: 413C58 ;margin: 0% ;padding-top: 40;padding-bottom: 40; color:white;text-align: center">
+      South East Asia Conclusion</h1>
+          <div class="row">
+               <nav style="background-color: 413C58 !important;" class="col-md-2 d-none d-md-block">
+                    <div class="sidebar-sticky">
+                         <ul class="nav flex-column" style="padding-left: 50">
+
+                              <li class="nav-item">
+                                   <a style="padding-top: 20vh" class="nav-link active">
+                                        <span data-feather="spaceTop"></span>
+                                   </a>
+                              </li>
+                              <li class="nav-item" onclick="choose1()">
+                                   <a class="nav-link active" style="color: white; font-size: 20px;" id="a1">
+                                        <span data-feather="home"></span>
+                                        GDP <span class="sr-only">(current)</span>
+                                   </a>
+                              </li>
+                              <li class="nav-item" onclick="choose2()">
+                                   <a class="nav-link" style="color: white; font-size: 20px;" id="a2">
+                                        <span data-feather="file"></span>
+                                        Government Revenue
+                                   </a>
+                              </li>
+                              <li class="nav-item" onclick="choose3()">
+                                   <a class="nav-link" style="color: white; font-size: 20px;" id="a3">
+                                        <span data-feather="shopping-cart"></span>
+                                        GDP per capita
+                                   </a>
+                              </li>
+                              <li class="nav-item" onclick="choose4()">
+                                   <a class="nav-link" style="color: white; font-size: 20px;" id="a4">
+                                        <span data-feather="users"></span>
+                                        Taxable
+                                   </a>
+                              </li>
+                              <li class="nav-item">
+                                   <a style="padding-bottom: 30vh" class="nav-link active">
+                                        <span data-feather="spaceTop"></span>
+                                   </a>
+                              </li>
+
+                         </ul>
+                    </div>
+               </nav>
+
+               <main role="main" class="main-dashboard col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div
+                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                         <h1 id="title-chart" class="h2" style="color: white">GDP</h1>
+                         <div class="btn-toolbar mb-2 mb-md-0">
+                              <button id="to1-2" onclick="to12()"
+                                   style="color: white; background-color:#A3C4BC; width: 100px; " type="button"
+                                   class="btn btn-sm btn-outline-secondary ">
+                                   Country
+                              </button>
+                              <button id="to2-1" onclick="to11()"
+                                   style="color: white;  background-color:#A3C4BC; width: 100px;" type="button"
+                                   class="btn btn-sm btn-outline-secondary ">
+                                   Year
+                              </button>
+                              <button id="to3-2" onclick="to32()"
+                                   style="color: white; background-color:#A3C4BC;width: 100px;" type="button"
+                                   class="btn btn-sm btn-outline-secondary ">
+                                   Country
+                              </button>
+                              <button id="to3-1" onclick="to31()"
+                                   style="color: white; background-color:#A3C4BC;width: 100px;" type="button"
+                                   class="btn btn-sm btn-outline-secondary ">
+                                   Year
+                              </button>
+                         </div>
+                    </div>
+                    <div id="choosen-1">
+                         <div id="line_con"></div>
+                         <div id="column_con"></div>
+                    </div>
+                    <div id="choosen-2">
+                         <div id="bar_con"></div>
+                    </div>
+                    <div id="choosen-3">
+                         <div id="line2_con"></div>
+                         <div id="column2_con"></div>
+                    </div>
+                    <div id="choosen-4">
+                         <div id="box_con"></div>
+                    </div>
+
+               </main>
+          </div>
+     </div>
+     <div class="top-scroller js-top-scroller">
+
+          <i class="far fa-arrow-up">Back to Top</i>
+     </div>
+     <script>
+          $(window).scroll(function () {
+               // console.log('wwww');
+               if ($(this).scrollTop() > 400) {
+                    $('.top-scroller').fadeIn();
+               } else {
+                    $('.top-scroller').fadeOut();
+               }
+          });
+          //Click event to scroll to top
+          $('.top-scroller').click(function () {
+               $('html, body').animate({ scrollTop: 0 }, 1000);
+               return false;
+          });
+
+     </script>
+</body>
+
+</html>
+<script src="./gdp/philippines.js"></script>
+<script src="./gdp/malaysia.js"></script>
+<script src="./gdp/indonesia.js"></script>
+<script src="./gdp/singapore.js"></script>
+<script src="./gdp/vietnam.js"></script>
+<script src="./conclusion/conclusion.js"></script>

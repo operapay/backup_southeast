@@ -1,0 +1,34 @@
+#container2_vi{
+    min-height: 400px;
+    max-height: 1200px;
+    display:inline-block;
+    width: 90%;
+    height: 100%;
+    padding-left: 10%; 
+  
+  }
+  #container_vi{
+    min-width: 300px;
+    max-width: 600px;
+    min-height: 400px;
+    max-height: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+  #bar_vi{
+    min-width: 300px;
+    max-width: 900px;
+    min-height: 400px;
+    max-height: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+  #pie_vi{
+    display:inline-block;
+    width: 90%;
+    height: 100%;
+    padding-left: 10%; 
+    display: none;
+  }

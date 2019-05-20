@@ -1,0 +1,158 @@
+/* body {
+  font-family: 'Kanit';
+  padding: 0;
+  margin: 0;
+} */
+
+h1 {
+  font-family: 'Kanit';
+}
+
+.map {
+  /* position: relative; */
+  width: 100%;
+}
+
+.div_btn {
+  max-width: 100%;
+  position: relative;
+  background-image: url("../images/map.png");
+  height: 800px;
+  background-repeat: no-repeat;
+  /* left: 20%; */
+}
+
+/* Make the image responsive */
+
+.banner img {
+  width: 100%;
+  height: auto;
+}
+
+/* Style the button and place it in the middle of the container/image */
+
+.btn_vietnam {
+  position: absolute;
+  /* top: 20%;
+  left: 22%; */
+  transform: translate(200px,50px);
+  /* -ms-transform: translate(-50%, -50%); */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  max-width: 140px;
+  opacity: 0.8;
+}
+
+.btn_vietnam:hover {
+  opacity: 1;
+  width: 11%;
+  max-width: 150px;
+}
+
+.btn_philippines {
+  position: absolute;
+  /* top: 25%;
+  left: 38%; */
+  transform: translate(470px, 120px);
+  /* -ms-transform: translate(-50%, -50%); */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  max-width: 140px;
+  opacity: 0.8;
+}
+
+.btn_philippines:hover {
+  opacity: 1;
+  width: 11%;
+  max-width: 150px;
+}
+
+.btn_indonesia {
+  position: absolute;
+  /* top: 55%;
+  left: 14%; */
+  transform: translate(50px, 350px);
+  /* -ms-transform: translate(-50%, -50%); */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  max-width: 140px;
+  opacity: 0.8;
+}
+
+.btn_indonesia:hover {
+  opacity: 1;
+  width: 11%;
+  max-width: 150px;
+}
+
+.btn_singapore {
+  position: absolute;
+  /* top: 61%;
+  left: 23%; */
+  transform: translate(220px, 420px);
+  /* -ms-transform: translate(-50%, -50%); */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  max-width: 140px;
+  opacity: 0.8;
+}
+
+.btn_singapore:hover {
+  opacity: 1;
+  width: 11%;
+  max-width: 150px;
+}
+
+.btn_malaysia {
+  position: absolute;
+  /* top: 58%;
+  left: 30%; */
+  transform: translate(350px, 370px);
+  /* -ms-transform: translate(-50%, -50%); */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  max-width: 140px;
+  opacity: 0.8;
+}
+
+.btn_malaysia:hover {
+  opacity: 1;
+  width: 11%;
+  max-width: 150px;
+}
+
+.text_sea {
+  position: absolute;
+  top: 35%;
+  left: 55%;
+  /* transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  /* width: 10%; */
+  /* max-width: 140px; */
+}
+
+.text_box {
+  position: absolute;
+  /* top: 58%;
+  left: 30%; */
+  transform: translate(900px, 100px);
+  /* -ms-transform: translate(-50%, -50%); */
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  width: 30%;
+  opacity: 0.8;
+}

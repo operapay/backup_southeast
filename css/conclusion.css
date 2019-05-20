@@ -1,0 +1,55 @@
+.container-fluid{
+    padding: 0 10% 0 155%;
+    background-color: #413C58;
+}
+.main-dashboard {
+    background-color: #413C58;
+}
+#choosen-1 {
+    display: inline;
+}
+#choosen-2 {
+    display: none;
+}
+#choosen-3 {
+    display: none;
+}
+#choosen-4 {
+    display: none;
+}
+
+#line_con {
+    display: block;margin-left: auto;margin-right: auto;
+    max-width: 1000;
+}
+#column_con {
+    display: none;margin-left: auto;margin-right: auto;max-width: 1000;
+}
+#bar_con {
+    display: block;margin-left: auto;margin-right: auto;max-width: 1000;
+}
+#line2_con{
+    display: block;margin-left: auto;margin-right: auto;max-width: 1000;
+}
+#column2_con{
+    display: none;margin-left: auto;margin-right: auto;max-width: 1000;
+}
+#box_con{
+    display: block;margin-left: auto;margin-right: auto;max-width: 1000;
+}
+
+#to1-2 {
+    display: inline;
+}
+#to2-1 {
+    display: none;
+}
+#to3-2 {
+    display: none;
+}
+#to3-1 {
+    display: none;
+}
+#a1:hover,#a2:hover,#a3:hover,#a4:hover{
+    background-color: #A3C4BC;
+}
